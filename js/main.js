@@ -1,11 +1,8 @@
-$('.header__content-photo__sliders').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    fade: true,
-    asNavFor: '.header__content-number__sliders'
-  });
-document.querySelector(".burger").addEventListener('click',function(){
-    this.classList.toggle('active');
-    document.querySelector('nav').classList.toggle('open');
-})
+$(document).ready(function(){
+  $(".header__content-photo__sliders").slick({
+    arrows:true,
+    Infinity:false,
+        prevArrow:'<button type="button" class="slick-prev"><img src="images/chevron-left.png" alt=""></button>',
+        nextArrow:'<button type="button" class="slick-next"><img src="images/chevron-left.png" alt=""></button>'
+  })
+});
