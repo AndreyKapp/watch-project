@@ -23,6 +23,7 @@ body{
     display:grid;
     grid-template-columns: 30% 15%;
     margin-bottom: 40px;
+    column-gap: 15px;
 }
 .title__item{
     font-size: 30px;
