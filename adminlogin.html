@@ -3,24 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/adminlogin.css">
     <title>Document</title>
   </head>
   <body>
     <main>
       <div class="container">
-        <form
+        <div class="form__inner">
+          <div class="logo__top">
+            <img src="images/logo-big.svg" alt="">
+          </div>
+          <form
           action="#"
           method="get"
           enctype="multipart/form-data"
           class="adminlogin"
         >
           <div class="login">
-            <input type="text" name="login" value="" />
+            <!-- <label for="login">login</label> -->
+            <input type="text" name="login" class="input__admin-login" value="" placeholder="login" />
           </div>
           <div class="password">
-            <input type="password" name="userpass" />
+            <input type="password" name="userpass" class="input__admin-login" placeholder="password" />
+          </div>
+          <div class="login__button">
+            <button class="button__item">Login</button>
           </div>
         </form>
+        </div>
+        
       </div>
     </main>
   </body>
