@@ -108,6 +108,9 @@ li {
   gap: 30px;
   text-transform: uppercase;
 }
+.menu__item :hover{
+  border-bottom: #fff 1px solid;
+}
 .phone {
   border-radius: 8px;
   background-color: #1e2827;
