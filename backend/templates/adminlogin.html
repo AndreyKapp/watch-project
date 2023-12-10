@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='css/adminlogin.css') }}"
+    />
+    <title>Admin panel</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="form__inner">
+          <div class="logo__top">
+            <img
+              src="{{ url_for('static', path='images/logo-big.svg') }}"
+              alt=""
+            />
+          </div>
+          <form action="token" method="POST" class="adminlogin">
+            <div class="login">
+              <input
+                type="text"
+                name="login"
+                class="input__admin-login"
+                value=""
+                placeholder="login"
+                id="username"
+              />
+            </div>
+            <div class="password">
+              <input
+                type="password"
+                name="userpass"
+                class="input__admin-login"
+                placeholder="password"
+                id="password"
+              />
+            </div>
+            <div class="login__button">
+              <button class="button__item">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script>
+    const formEl = document.querySelector("form");
+    function getToken(username, password) {
+      fetch("/api/token", {
+        method: "POST",
+        body: `username=${username}&password=${password}`,
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          document.cookie = "authorization=" + `Bearer ${json.access_token}`;
+          location.reload();
+        });
+    }
+    formEl.addEventListener("submit", (event) => {
+      const login = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      event.preventDefault();
+      getToken(login, password);
+    });
+  </script>
+</html>

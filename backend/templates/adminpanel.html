@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='css/adminitem.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="admin__item-inner">
+        <div class="logo">
+          <img
+            src="{{ url_for('static', path='images/logo-big.svg') }}"
+            alt=""
+          />
+        </div>
+        <div class="top">
+          <div class="title">Title</div>
+          <div class="price">Price</div>
+          {% for item in items %}
+          <div class="test__block1">
+            <a href="item/{{item.id}}">{{ item.title }}</a>
+          </div>
+          <div class="test__block1">{{ item.price }}</div>
+          {% endfor %}
+        </div>
+        <div class="create">
+          <p class="title__item">Create new item</p>
+        </div>
+        <div class="add__product">
+          <form action="#">
+            <div class="add__product-element">
+              <input
+                class="input"
+                type="text"
+                placeholder="item title"
+                id="title"
+                name="title"
+              />
+              <input
+                class="input"
+                type="text"
+                placeholder="item description"
+                id="description"
+                name="description"
+              />
+              <input
+                class="input"
+                type="number"
+                id="price"
+                name="price"
+                placeholder="item price"
+              />
+              <input class="add__file" type="file" id="image" name="image" />
+              <button>Create item</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      const formEl = document.querySelector("form");
+      function createItem(title, description, price, image) {
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("price", price);
+        formData.append("image", image);
+        fetch("/api/item", {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: getCookie("authorization"),
+          },
+        }).then((_) => location.reload());
+      }
+      function getCookie(name) {
+        let matches = document.cookie.match(
+          new RegExp(
+            "(?:^|; )" +
+              name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+              "=([^;]*)"
+          )
+        );
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      }
+      formEl.addEventListener("submit", (event) => {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const price = document.getElementById("price").value;
+        const image = document.getElementById("image").files[0];
+        event.preventDefault();
+        createItem(title, description, price, image);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+@font-face {
+    font-family: "Epilogue";
+    src: url("../fonts/Epilogue-Italic-VariableFont_wght.ttf");
+  }
+  @font-face {
+    font-family: "Epilogue";
+    src: url("../fonts/Epilogue-VariableFont_wght.ttf");
+  }
+body{
+    background-color: black;
+    color: #fff;
+    font-family: "Epilogue", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    color: #fff;
+    line-height: 18px;
+}
+/* .container{
+    width: 1220px;
+} */
+.inner{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.catalog__img{
+    background: var(--dark-green, #1E2827);
+}
+.button__admin-panel{
+    margin-top: 15px;
+    width: 100px;
+    height: 22px;
+    color: #fff;
+    background-color: black;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
