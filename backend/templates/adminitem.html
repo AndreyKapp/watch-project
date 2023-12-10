@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin panel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='css/adminpanel.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner">
+        <div class="catalog__price">
+          <img
+            src="{{ url_for('static', path='images/' + item.image_name) }}"
+            alt="item image"
+            class="catalog__img"
+          />
+          <div class="description__product">{{ item.description }}</div>
+          <div class="price">{{ item.price }}</div>
+          <button
+            id="dltBtn"
+            data-id="{{ item.id }}"
+            class="button__admin-panel"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const delBtn = document.getElementById("dltBtn");
+    function deleteItem(id) {
+      fetch(`/api/item/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: getCookie("authorization"),
+        },
+      });
+    }
+    function getCookie(name) {
+      let matches = document.cookie.match(
+        new RegExp(
+          "(?:^|; )" +
+            name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+            "=([^;]*)"
+        )
+      );
+      return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    delBtn.addEventListener("click", (event) => {
+      deleteItem(delBtn.dataset.id);
+      window.location.href = "/admin";
+    });
+  </script>
+</html>
